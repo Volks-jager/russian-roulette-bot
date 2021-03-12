@@ -86,18 +86,18 @@ async def shoot_handler(call):
         await bot.edit_message_text(chat_id=call.message.chat.id, message_id= call.message.message_id, 
                         text=string('ru', 'shoot').format(call.from_user.id, call.from_user.first_name if call.from_user.first_name else "noname"), 
                         reply_markup = inline_keyboard_remove(), parse_mode='HTML')
-        await asyncio.sleep(3)
+        await asyncio.sleep(5)
         if await shoot(call):
             await bot.send_message(chat_id=call.message.chat.id, text=string('ru', 'dead').format(user_id, name), parse_mode='HTML')
             if await last_standing(call):
                 user_id, name = await endgame(call)
                 await bot.send_message(chat_id=call.message.chat.id, text=string('ru', 'endgame').format(user_id, name), parse_mode='HTML')
             else:
-                await asyncio.sleep(3)
+                await asyncio.sleep(5)
                 await next_turn(call)
         else:
             await bot.send_message(chat_id=call.message.chat.id, text=string('ru', 'alive').format(user_id, name), parse_mode='HTML')
-            await asyncio.sleep(3)
+            await asyncio.sleep(5)
             await next_turn(call)
     else:
         await bot.answer_callback_query(call.id, text=string('ru', 'not_your_turn'), show_alert=True)
@@ -111,18 +111,18 @@ async def rotate_handler(call):
         await bot.edit_message_text(chat_id=call.message.chat.id, message_id= call.message.message_id, 
                         text=string('ru', 'rotate').format(call.from_user.id, call.from_user.first_name if call.from_user.first_name else "noname"), 
                         reply_markup = inline_keyboard_remove(), parse_mode='HTML')
-        await asyncio.sleep(3)
+        await asyncio.sleep(5)
         if await rotate(call):
             await bot.send_message(chat_id=call.message.chat.id, text=string('ru', 'dead').format(user_id, name), parse_mode='HTML')
             if await last_standing(call):
                 user_id, name = await endgame(call)
                 await bot.send_message(chat_id=call.message.chat.id, text=string('ru', 'endgame').format(user_id, name), parse_mode='HTML')
             else:
-                await asyncio.sleep(3)
+                await asyncio.sleep(5)
                 await next_turn(call)
         else:
             await bot.send_message(chat_id=call.message.chat.id, text=string('ru', 'alive').format(user_id, name), parse_mode='HTML')
-            await asyncio.sleep(3)
+            await asyncio.sleep(5)
             await next_turn(call)
     else:
         await bot.answer_callback_query(call.id, text=string('ru', 'not_your_turn'), show_alert=True)
