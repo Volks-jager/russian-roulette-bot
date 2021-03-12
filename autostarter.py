@@ -8,7 +8,6 @@ from keyboards import inline_keyboard_remove, turn_keyboard
 from main import bot
 
 async def startgames():
-    print("startgames")
     games_to_start = Game.objects.filter(start_time__lt = (datetime.now() - timedelta(seconds=300)), is_start=False)
     for game in games_to_start:
         usergames_count = Usergame.objects.filter(game=game).count()
@@ -43,7 +42,6 @@ async def startgames():
 
 
 async def user_timeout():
-    print("user_timeout")
     usergames = Usergame.objects.filter(turn_start_time__lt=(datetime.now() - timedelta(seconds=30)), is_pending = True)
     for usergame in usergames:
         killer_arr = Usergame.objects.filter(game=usergame.game, status='alive').exclude(pk=usergame.pk)
